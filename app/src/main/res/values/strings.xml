@@ -3,4 +3,6 @@
     <string name="all_seats_are_available">Все места свободны</string>
     <string name="zero">0</string>
     <string name="reset">Сброс</string>
+    <string name="too_many_passengers">Пассажиров слишком много!</string>
+    <string name="places_left">Осталось мест: %d</string>
 </resources>
