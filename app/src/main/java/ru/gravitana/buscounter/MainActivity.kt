@@ -19,12 +19,11 @@ class MainActivity : AppCompatActivity() {
         binding.plusButton.setOnClickListener {
             if (counter == placesTotal) {
                 binding.resetButton.visibility = View.VISIBLE
-                binding.messageTextView.setTextColor(getColorStateList(R.color.red))
-                binding.messageTextView.text = getText(R.string.too_many_passengers)
+                setMessage(binding, R.color.red, getString(R.string.too_many_passengers))
             } else {
                 counter++
-                binding.messageTextView.setTextColor(getColorStateList(R.color.black))
-                binding.messageTextView.text = getString(R.string.places_left, placesTotal - counter)
+                setMessage(binding, R.color.black, getString(R.string.places_left, placesTotal - counter))
+                binding.resetButton.visibility = View.INVISIBLE
             }
             binding.counterTextView.text = counter.toString()
         }
@@ -33,12 +32,14 @@ class MainActivity : AppCompatActivity() {
             if (counter > 0) {
                 counter--
 
+                if (counter < placesTotal) {
+                    binding.resetButton.visibility = View.INVISIBLE
+                }
+
                 if (counter == 0) {
-                    binding.messageTextView.setTextColor(getColorStateList(R.color.green))
-                    binding.messageTextView.text = getText(R.string.all_seats_are_available)
+                    setMessage(binding, R.color.green, getString(R.string.all_seats_are_available))
                 } else {
-                    binding.messageTextView.setTextColor(getColorStateList(R.color.black))
-                    binding.messageTextView.text = getString(R.string.places_left, placesTotal - counter)
+                    setMessage(binding, R.color.black, getString(R.string.places_left, placesTotal - counter))
                 }
             }
             binding.counterTextView.text = counter.toString()
@@ -47,9 +48,14 @@ class MainActivity : AppCompatActivity() {
         binding.resetButton.setOnClickListener {
             counter = 0
 
+            setMessage(binding, R.color.green, getString(R.string.all_seats_are_available))
             binding.counterTextView.text = counter.toString()
-            binding.messageTextView.setTextColor(getColorStateList(R.color.green))
-            binding.messageTextView.text = getText(R.string.all_seats_are_available)
+            binding.resetButton.visibility = View.INVISIBLE
         }
+    }
+
+    private fun setMessage(binding: ActivityMainBinding, color: Int, text: String) {
+        binding.messageTextView.setTextColor(getColorStateList(color))
+        binding.messageTextView.text = text
     }
 }
