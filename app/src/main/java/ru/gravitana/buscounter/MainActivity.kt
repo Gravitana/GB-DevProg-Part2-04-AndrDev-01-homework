@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.gravitana.buscounter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    var counter = 0
-    val placesTotal = 50
+    private var counter = 0
+    private val placesTotal = 50
 
     @SuppressLint("StringFormatInvalid")
     override fun onCreate(savedInstanceState: Bundle?) {
